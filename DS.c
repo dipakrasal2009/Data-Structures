@@ -216,8 +216,8 @@ int main()
 	InsertLast(&Head,22);
 	InsertLast(&Head,23);
 	//InsertAtPos(&Head,20,3);
-	//deleteFirst(&Head);
-	//DeleteLast(&Head);
+	deleteFirst(&Head);
+	DeleteLast(&Head);
 	DeleteAtPos(&Head,3);
 	Display(Head);
 	Ret = nodecount(Head);
