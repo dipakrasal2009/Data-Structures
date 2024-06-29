@@ -134,6 +134,93 @@ void DoublyLL :: InsertAtPos(int no , int ipos)
         }
 }
 
+void DoublyLL :: DeleteFirst()
+{
+	PNODE temp = First;
+	if(First == NULL)
+	{
+		cout<<"linked List is empty Nothing to delete\n";
+		return;
+	}
+	else if (First -> next == NULL)
+	{
+		delete First;
+		First = NULL;
+		count--;
+	}
+	else
+	{
+		First = First->next;
+		delete First->prev;
+
+		First->prev = NULL;
+		
+		count--;
+	}
+}
+
+void DoublyLL :: DeleteLast()
+{
+	PNODE temp = First;
+
+	if(First == NULL)
+	{
+		return;
+	}
+	else if(First -> next == NULL)
+	{
+		delete First;
+		First = NULL;
+		count--;
+	}
+	else
+	{
+		while(temp->next->next != NULL)
+		{
+			temp = temp->next;
+		}
+		delete temp -> next;
+		temp->next = NULL;
+		count--;
+	}
+}
+
+void DoublyLL :: DeleteAtPos(int ipos)
+{
+	PNODE temp1 = NULL;
+	PNODE temp2 = NULL;
+	int iCnt = 0;
+
+	if((ipos < 1)||(ipos > count+1))
+	{
+		cout<<"Invalid position\n";
+		return;
+	}
+	
+	if(ipos == 1)
+	{
+		DeleteFirst();
+	}
+	else if(ipos == count)
+	{
+		DeleteLast();
+	}
+	else
+	{
+		temp1 = First;
+		for (iCnt = 1 ; iCnt < ipos-1;iCnt++)
+		{
+			temp1 = temp1 -> next;
+		}
+		temp2 = temp1->next;
+
+		temp1->next = temp2->next;
+		temp2->next->prev = temp1;
+		delete temp2;
+		count--;
+	}
+}
+
 
 void DoublyLL :: Display()
 {
@@ -169,10 +256,18 @@ int main()
 	obj.InsertLast(111);
 	obj.InsertLast(121);
 //	obj.Display();
-     //   cout<<"Number of nodes in the linked List : "<<obj.count<<"\n";
+    //    cout<<"Number of nodes in the linked List : "<<obj.count<<"\n";
 
 	obj.InsertAtPos(71,4);
+
+	obj.DeleteFirst();
+
+	obj.DeleteLast();
+
+	obj.DeleteAtPos(3);
+
 	obj.Display();
+
 	cout<<"Numebr of nodes in the linked list : "<<obj.count<<"\n";
 
 
