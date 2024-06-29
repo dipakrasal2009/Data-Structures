@@ -88,6 +88,53 @@ void DoublyLL :: InsertLast(int no)
 }
 
 
+
+void DoublyLL :: InsertAtPos(int no , int ipos)
+{
+        if((ipos < 1)|| (ipos > count+1))
+        {
+                cout<<"Invalid position\n";
+                return;
+        }
+        else if(ipos == 1)
+        {
+                InsertFirst(no);
+        }
+        else if (ipos == count+1)
+        {
+                InsertLast(no);
+        }
+        else
+        {
+                PNODE newn = new NODE;
+                PNODE temp = First;
+                newn->prev = NULL;
+                newn-> data = no;
+                newn->next =  NULL;
+
+                for(int i = 1;i < ipos-1; i++)
+                {
+			if (temp == NULL)
+            		{
+           		        cout << "Unexpected null pointer\n";
+                		return;
+            		}
+                        temp = temp->next;
+                }
+//		temp->next->prev = newn;
+
+                (newn) ->next = (temp)->next;
+		if (temp->next != NULL)
+		{
+                	(temp)->next->prev = newn;
+		}
+                (temp)->next = newn;
+                (newn)->prev = temp;
+                count++;
+        }
+}
+
+
 void DoublyLL :: Display()
 {
 	cout<<"Element of linked List are : \n";
@@ -103,43 +150,6 @@ void DoublyLL :: Display()
 }
 
 
-void DoublyLL :: InsertAtPos(int no , int ipos)
-{
-	if((ipos < 1)|| (ipos > count+1))
-	{
-		cout<<"Invalid position\n";
-		return;
-	}
-	else if(ipos == 1)
-	{
-		InsertFirst(no);
-	}
-	else if (ipos == count+1)
-	{
-		InsertLast(no);
-	}
-	else
-	{
-		PNODE newn = new NODE;
-		PNODE temp = First;
-		newn->prev = NULL;
-		newn-> data = no;
-		newn->next =  NULL;
-
-		for(int i = 1;i < ipos-1; i++)
-		{
-			temp = temp->next;
-		}
-		newn ->next = temp->next;
-		temp->next->prev = newn;
-		temp->next = newn;
-		newn->prev = temp;
-		count++;
-	}
-}
-
-
-
 
 
 
@@ -151,15 +161,15 @@ int main()
 	obj.InsertFirst(51);
 	obj.InsertFirst(21);
 	obj.InsertFirst(11);
-	obj.Display();
-	cout<<"Number of nodes in the linked List : "<<obj.count<<"\n";
+//	obj.Display();
+//	cout<<"Number of nodes in the linked List : "<<obj.count<<"\n";
 
 
 	obj.InsertLast(101);
 	obj.InsertLast(111);
 	obj.InsertLast(121);
-	obj.Display();
-        cout<<"Number of nodes in the linked List : "<<obj.count<<"\n";
+//	obj.Display();
+     //   cout<<"Number of nodes in the linked List : "<<obj.count<<"\n";
 
 	obj.InsertAtPos(71,4);
 	obj.Display();
