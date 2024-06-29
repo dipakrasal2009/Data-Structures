@@ -105,7 +105,7 @@ void DoublyLL :: Display()
 
 void DoublyLL :: InsertAtPos(int no , int ipos)
 {
-	if((ipos < 1)|| (ipos > count))
+	if((ipos < 1)|| (ipos > count+1))
 	{
 		cout<<"Invalid position\n";
 		return;
@@ -114,7 +114,7 @@ void DoublyLL :: InsertAtPos(int no , int ipos)
 	{
 		InsertFirst(no);
 	}
-	else if (ipos == count)
+	else if (ipos == count+1)
 	{
 		InsertLast(no);
 	}
